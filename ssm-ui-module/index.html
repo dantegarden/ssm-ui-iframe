@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>-->
+    <title>ssm-ui-module</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <!--<div ng-include="public/public.html"></div>-->
+    <script type="text/javascript">
+      const body = document.body;
+      // 监听
+      const observer = new MutationObserver(mutationsList => {
+        // 得到当前的高度
+        const appMain = document.querySelector('.app-main');
+        let currentHeight = body.scrollHeight
+        if(appMain){
+          currentHeight = appMain.offsetHeight
+        }
+        // 向父窗口发数据
+        top.postMessage(currentHeight,"*");
+      });
+
+      observer.observe(body, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+      });
+    </script>
+  </body>
+</html>
